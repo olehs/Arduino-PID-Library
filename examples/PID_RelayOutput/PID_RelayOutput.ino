@@ -31,6 +31,8 @@ unsigned long windowStartTime;
 
 void setup()
 {
+  pinMode(PIN_INPUT, INPUT);
+  pinMode(RELAY_PIN, OUTPUT);
   windowStartTime = millis();
 
   //initialize the variables we're linked to
@@ -55,10 +57,6 @@ void loop()
   { //time to shift the Relay Window
     windowStartTime += WindowSize;
   }
-  if (Output < millis() - windowStartTime) digitalWrite(RELAY_PIN, HIGH);
+  if (Output > millis() - windowStartTime) digitalWrite(RELAY_PIN, HIGH);
   else digitalWrite(RELAY_PIN, LOW);
-
 }
-
-
-
