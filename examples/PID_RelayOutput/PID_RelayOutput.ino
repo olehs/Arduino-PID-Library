@@ -48,6 +48,7 @@ void setup()
 void loop()
 {
   Input = analogRead(PIN_INPUT);
+  myPID.Compute();
 
   /************************************************
    * turn the output pin on/off based on pid output
@@ -55,7 +56,6 @@ void loop()
   if (millis() - windowStartTime > WindowSize)
   { //time to shift the Relay Window
     windowStartTime += WindowSize;
-    myPID.Compute();
   }
   if (Output > millis() - windowStartTime) digitalWrite(RELAY_PIN, HIGH);
   else digitalWrite(RELAY_PIN, LOW);
